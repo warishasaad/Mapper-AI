@@ -1,0 +1,6 @@
+# File: .streamlit/config.toml
+
+[server]
+# Increase the timeout for server-to-server communication.
+# Default is 300 seconds. We'll set it to 1200 (20 minutes).
+serverRequestTimeout = 1200

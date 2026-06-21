@@ -1,0 +1,51 @@
+# requirements.txt
+
+# ===============================================
+# API Framework & Core Logic (Existing)
+# ===============================================
+fastapi
+uvicorn[standard]
+pydantic>=2.0.0
+pydantic-settings
+python-dotenv
+python-multipart
+click
+httpx
+PyMuPDF
+PyPDF2
+python-dateutil>=2.8.0
+pdfplumber>=0.7.0
+pandas>=1.5.0
+numpy<2.0.0,>=1.24.0
+jsonpath-ng>=1.5.0
+requests>=2.28.0
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.20.0
+structlog>=22.0.0
+reportlab
+
+# ===============================================
+# AI Enhancement (Existing)
+# ===============================================
+ollama
+
+# ===============================================
+# Development & Testing (Existing)
+# ===============================================
+pytest>=7.0.0
+pytest-cov>=4.0.0
+factory-boy>=3.2.0
+responses>=0.23.0
+
+# OCR Libraries (Existing)
+pytesseract
+opencv-python
+
+# ===============================================
+# UI Dependencies (ADD THESE LINES)
+# ===============================================
+streamlit
+# For PDF generation in the UI
+PyPDFForm
+fillpdf
+pdfrw2

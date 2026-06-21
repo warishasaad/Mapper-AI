@@ -1,0 +1,58 @@
+# docker-compose.yml (Final Corrected Version)
+
+services:
+  # The FastAPI API service
+  api:
+    build: .
+    container_name: mapperai-api-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    # Set environment variables for the API service
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=phi3:mini
+      - OLLAMA_TIMEOUT=120.0  # CORRECTED: 120-second timeout for AI calls
+    # Tell Docker to wait for the Ollama service to be ready
+    depends_on:
+      - ollama
+
+  # The Streamlit UI service
+  ui:
+    build: .
+    container_name: mapperai-ui-service
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    # CORRECTED: Removed the invalid timeout flag. Timeout is now handled
+    # by the .streamlit/config.toml file.
+    command: streamlit run ui.py --server.port 8501 --server.address 0.0.0.0
+    depends_on:
+      - api
+
+  # The Ollama service, running inside Docker
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama-service
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama_data:/root/.ollama  # Persists models on your host machine
+    # Performance tuning: Keep models loaded in RAM for 10 minutes.
+    environment:
+      - OLLAMA_KEEP_ALIVE=10m
+    # Optional: Uncomment for NVIDIA GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+# Define a volume for persisting Ollama models
+volumes:
+  ollama_data:
