@@ -1,0 +1,1 @@
+MapperAI replaces the slow, manual document mapping process with an intelligent, automated system. Where staff used to spend hours connecting each field to the database, MapperAI now does it in under 60 seconds. It uses AI to Mapper AI instantly detect fields, understand their relationships and context, and generate final, auto-fillable PDFs. 
